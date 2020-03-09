@@ -34,65 +34,6 @@ function mainMenu() {
     document.body.appendChild(menu);
 }
 
-
-function start() {
-    username = document.getElementById("username").value;
-    document.getElementById("main-menu").remove();
-
-    let scoreDisplay = document.createElement("h1");
-    scoreDisplay.id = "score";
-    scoreDisplay.classList.add("wrapper");
-    document.body.appendChild(scoreDisplay);
-
-    let platform = document.createElement("div");
-    platform.classList.add("wrapper");
-    let innerPlatform = document.createElement("img");
-    innerPlatform.id = "platform";
-    innerPlatform.src = "images/3.jpg";
-    platform.appendChild(innerPlatform);
-    document.body.appendChild(platform);
-
-    let word = document.createElement("div");
-    word.id = "word";
-    word.classList.add("wrapper");
-    document.body.appendChild(word);
-
-    let buttons = document.createElement("div");
-    buttons.id = "buttons";
-    buttons.classList.add("wrapper");
-    document.body.appendChild(buttons);
-
-    let description = document.createElement("h1");
-    description.id = "description";
-    description.classList.add("wrapper");
-    document.body.appendChild(description);
-
-    let resetHolder = document.createElement("div");
-    resetHolder.classList.add("wrapper");
-    let resetButton = document.createElement("button");
-    resetButton.id = "reset";
-    resetButton.textContent = "Reset"
-    resetHolder.appendChild(resetButton);
-    document.body.appendChild(resetHolder);
-
-
-    document.getElementById("platform").src = "images/3.jpg";
-    document.getElementById('score').innerHTML = "Score: " + score;
-    words.push("committee");
-    words.push("salmon");
-    words.push("determine");
-    words.push("genius");
-    words.push("delta");
-    words.push("life");
-    words.push("world");
-    words.push("circus");
-    words.push("time");
-    words.push("esophagus");
-    generateButtons();
-    wordPlacer();
-    document.getElementById("reset").onclick = resetButton;
-}
-
 function wordChooser() {
     let r = Math.floor(Math.random() * words.length);
     wordChosen = r;
@@ -276,6 +217,65 @@ function resetButton() {
     document.getElementById('score').innerHTML = "Score: " + score;
     wordPlacer();
     generateButtons();
+}
+
+
+function start() {
+    username = document.getElementById("username").value;
+    document.getElementById("main-menu").remove();
+
+    let scoreDisplay = document.createElement("h1");
+    scoreDisplay.id = "score";
+    scoreDisplay.classList.add("wrapper");
+    document.body.appendChild(scoreDisplay);
+
+    let platform = document.createElement("div");
+    platform.classList.add("wrapper");
+    let innerPlatform = document.createElement("img");
+    innerPlatform.id = "platform";
+    innerPlatform.src = "images/3.jpg";
+    platform.appendChild(innerPlatform);
+    document.body.appendChild(platform);
+
+    let word = document.createElement("div");
+    word.id = "word";
+    word.classList.add("wrapper");
+    document.body.appendChild(word);
+
+    let buttons = document.createElement("div");
+    buttons.id = "buttons";
+    buttons.classList.add("wrapper");
+    document.body.appendChild(buttons);
+
+    let description = document.createElement("h1");
+    description.id = "description";
+    description.classList.add("wrapper");
+    document.body.appendChild(description);
+
+    let resetHolder = document.createElement("div");
+    resetHolder.classList.add("wrapper");
+    let resetButton = document.createElement("button");
+    resetButton.id = "reset";
+    resetButton.textContent = "Reset"
+    resetHolder.appendChild(resetButton);
+    document.body.appendChild(resetHolder);
+
+
+    document.getElementById("platform").src = "images/3.jpg";
+    document.getElementById('score').innerHTML = "Score: " + score;
+    words.push("committee");
+    words.push("salmon");
+    words.push("determine");
+    words.push("genius");
+    words.push("delta");
+    words.push("life");
+    words.push("world");
+    words.push("circus");
+    words.push("time");
+    words.push("esophagus");
+    generateButtons();
+    wordPlacer();
+    document.getElementById("reset").setAttribute("onclick", "resetButton()");
 }
 
 mainMenu();
