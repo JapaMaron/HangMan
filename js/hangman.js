@@ -289,7 +289,7 @@ function start() {
 }
 
 function readDatabase() {
-    db.collection('sessions').get().then(snapshot => {
+    db.collection('sessions').orderBy('order').limit(10).get().then(snapshot => {
         snapshot.docs.forEach(doc => {
             scoreBoardArray.push({
                 "session": doc.id,
@@ -297,24 +297,22 @@ function readDatabase() {
                 "score": doc.data().score
             });
         });
-        scoreBoardArray.sort((a, b) => {
-            let result = 0;
-            if (a.score > b.score) {
-                result = -1;
-            }
-            if (a.score < b.score) {
-                result = 1;
-            }
-            return result;
-        });
         renderDatabase();
     });
 }
 
 function renderDatabase() {
+    let scoreTitle = document.createElement("h1");
+    scoreTitle.textContent = textContent = "Top 10 Players";
+    scoreTitle.classList.add("wrapper");
+    document.body.appendChild(scoreTitle);
+    
     let table = document.createElement("table");
     table.classList.add("score-board");
     document.body.appendChild(table);
+    
+
+
 
     let tr = document.createElement("tr");
     let tdId = document.createElement("td");
@@ -345,6 +343,7 @@ function renderDatabase() {
 
 async function presentResults(username, score) {
     await db.collection('sessions').add({
+        "order": score * -1,
         "name": username,
         "score": score
     });
