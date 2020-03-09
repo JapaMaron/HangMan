@@ -8,9 +8,74 @@ let score = 0;
 let letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
     "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
-document.body.onload = start;
+let username;
+
+function mainMenu() {
+    let menu = document.createElement("div");
+    menu.id = "main-menu";
+    let menuTitle = document.createElement("h1");
+    menuTitle.textContent = "Hang Man"
+    let menuSubText = document.createElement("h2");
+    menuSubText.textContent = "Enter Your Name";
+    menu.appendChild(menuTitle);
+    menu.appendChild(menuSubText);
+    menu.classList.add("wrapper");
+
+    let usernameInput = document.createElement("input");
+    usernameInput.id = "username";
+    usernameInput.type = "text";
+    menu.appendChild(usernameInput);
+
+    let startGameButton = document.createElement("button");
+    startGameButton.innerText = "Start";
+    startGameButton.onclick = start;
+    menu.appendChild(startGameButton);
+
+    document.body.appendChild(menu);
+}
+
 
 function start() {
+    username = document.getElementById("username").value;
+    document.getElementById("main-menu").remove();
+
+    let scoreDisplay = document.createElement("h1");
+    scoreDisplay.id = "score";
+    scoreDisplay.classList.add("wrapper");
+    document.body.appendChild(scoreDisplay);
+
+    let platform = document.createElement("div");
+    platform.classList.add("wrapper");
+    let innerPlatform = document.createElement("img");
+    innerPlatform.id = "platform";
+    innerPlatform.src = "images/3.jpg";
+    platform.appendChild(innerPlatform);
+    document.body.appendChild(platform);
+
+    let word = document.createElement("div");
+    word.id = "word";
+    word.classList.add("wrapper");
+    document.body.appendChild(word);
+
+    let buttons = document.createElement("div");
+    buttons.id = "buttons";
+    buttons.classList.add("wrapper");
+    document.body.appendChild(buttons);
+
+    let description = document.createElement("h1");
+    description.id = "description";
+    description.classList.add("wrapper");
+    document.body.appendChild(description);
+
+    let resetHolder = document.createElement("div");
+    resetHolder.classList.add("wrapper");
+    let resetButton = document.createElement("button");
+    resetButton.id = "reset";
+    resetButton.textContent = "Reset"
+    resetHolder.appendChild(resetButton);
+    document.body.appendChild(resetHolder);
+
+
     document.getElementById("platform").src = "images/3.jpg";
     document.getElementById('score').innerHTML = "Score: " + score;
     words.push("committee");
@@ -25,6 +90,7 @@ function start() {
     words.push("esophagus");
     generateButtons();
     wordPlacer();
+    document.getElementById("reset").onclick = resetButton;
 }
 
 function wordChooser() {
@@ -212,4 +278,6 @@ function resetButton() {
     generateButtons();
 }
 
-document.getElementById("reset").onclick = resetButton;
+mainMenu();
+
+
