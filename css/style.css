@@ -58,10 +58,10 @@
 	top:1px;
 }
 
-.score-board {
+#score-board {
 	margin: 0 auto;
 }
 
-.score-board td {
+#score-board td {
 	padding: 10px;
 }

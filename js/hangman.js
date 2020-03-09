@@ -209,6 +209,8 @@ function decsriptionPlacer() {
 }
 
 function resetButton() {
+    window.location.reload(false); 
+    /* Hopefully we don't need this
     let r = words[wordChosen]
     lives = 7;
     lifeCheck();
@@ -225,8 +227,10 @@ function resetButton() {
     document.getElementById("word").innerHTML = "";
     score = 0;
     document.getElementById('score').innerHTML = "Score: " + score;
+    
     wordPlacer();
     generateButtons();
+    */
 }
 
 
@@ -305,10 +309,11 @@ function renderDatabase() {
     let scoreTitle = document.createElement("h1");
     scoreTitle.textContent = textContent = "Top 10 Players";
     scoreTitle.classList.add("wrapper");
+    scoreTitle.id = "score-title";
     document.body.appendChild(scoreTitle);
     
     let table = document.createElement("table");
-    table.classList.add("score-board");
+    table.id = "score-board";
     document.body.appendChild(table);
     
 
