@@ -57,3 +57,11 @@
 	position:relative;
 	top:1px;
 }
+
+.score-board {
+	margin: 0 auto;
+}
+
+.score-board td {
+	padding: 10px;
+}

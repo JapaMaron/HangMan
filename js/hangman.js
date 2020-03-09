@@ -6,9 +6,11 @@ let wordChosen;
 let buttonCheck = 0;
 let score = 0;
 let letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
-    "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+];
 
 let username;
+let scoreBoardArray = [];
 
 function mainMenu() {
     let menu = document.createElement("div");
@@ -66,7 +68,8 @@ function generateButtons() {
         b.onclick = function () {
             pressButton(b);
         }
-        buttons[i] = b; document.getElementById('buttons').appendChild(b);
+        buttons[i] = b;
+        document.getElementById('buttons').appendChild(b);
         buttons[i].style.height = "30px";
         buttons[i].style.width = "55px";
         buttons[i].style.margin = "2px";
@@ -119,6 +122,13 @@ function winCheck() {
     }
 }
 
+function gameOver() {
+    document.getElementById("description").innerHTML = "";
+    document.getElementById("word").innerHTML = "GAME OVER";
+    presentResults(username, score);
+
+}
+
 function lifeCheck() {
     switch (lives) {
         case 7:
@@ -153,8 +163,7 @@ function lifeCheck() {
                 let w = buttons[i];
                 w.parentNode.removeChild(w);
             }
-            document.getElementById("description").innerHTML = "";
-            document.getElementById("word").innerHTML = "GAME OVER";
+            gameOver();
             break;
         default:
             break;
@@ -203,15 +212,16 @@ function resetButton() {
     let r = words[wordChosen]
     lives = 7;
     lifeCheck();
-    if(document.getElementById("word").innerHTML != "GAME OVER"){
-    for (let i = 0; i < r.length; i++) {
-        let w = blocks[i];
-        w.parentNode.removeChild(w);
+    if (document.getElementById("word").innerHTML != "GAME OVER") {
+        for (let i = 0; i < r.length; i++) {
+            let w = blocks[i];
+            w.parentNode.removeChild(w);
+        }
+        for (let i = 0; i < buttons.length; i++) {
+            let w = buttons[i];
+            w.parentNode.removeChild(w);
+        }
     }
-    for (let i = 0; i < buttons.length; i++) {
-        let w = buttons[i];
-        w.parentNode.removeChild(w);
-    }}
     document.getElementById("word").innerHTML = "";
     score = 0;
     document.getElementById('score').innerHTML = "Score: " + score;
@@ -278,6 +288,68 @@ function start() {
     document.getElementById("reset").setAttribute("onclick", "resetButton()");
 }
 
+function readDatabase() {
+    db.collection('sessions').get().then(snapshot => {
+        snapshot.docs.forEach(doc => {
+            scoreBoardArray.push({
+                "session": doc.id,
+                "name": doc.data().name,
+                "score": doc.data().score
+            });
+        });
+        scoreBoardArray.sort((a, b) => {
+            let result = 0;
+            if (a.score > b.score) {
+                result = -1;
+            }
+            if (a.score < b.score) {
+                result = 1;
+            }
+            return result;
+        });
+        renderDatabase();
+    });
+}
+
+function renderDatabase() {
+    let table = document.createElement("table");
+    table.classList.add("score-board");
+    document.body.appendChild(table);
+
+    let tr = document.createElement("tr");
+    let tdId = document.createElement("td");
+    tdId.textContent = "SESSION";
+    let tdName = document.createElement("td");
+    tdName.textContent = "NAME";
+    let tdScore = document.createElement("td");
+    tdScore.textContent = "SCORE";
+    tr.appendChild(tdId);
+    tr.appendChild(tdName);
+    tr.appendChild(tdScore);
+    table.appendChild(tr);
+
+    for (let score in scoreBoardArray) {
+        let tr = document.createElement("tr");
+        let tdId = document.createElement("td");
+        tdId.textContent = scoreBoardArray[score].session;
+        let tdName = document.createElement("td");
+        tdName.textContent = scoreBoardArray[score].name;
+        let tdScore = document.createElement("td");
+        tdScore.textContent = scoreBoardArray[score].score;
+        tr.appendChild(tdId);
+        tr.appendChild(tdName);
+        tr.appendChild(tdScore);
+        table.appendChild(tr);
+    }
+}
+
+async function presentResults(username, score) {
+    await db.collection('sessions').add({
+        "name": username,
+        "score": score
+    });
+
+    readDatabase();
+}
+
 mainMenu();
-
-
