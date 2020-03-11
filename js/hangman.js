@@ -5,8 +5,8 @@ let blocks = [];
 let wordChosen;
 let buttonCheck = 0;
 let score = 0;
-let letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
-    "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+let letter = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s",
+    "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"
 ];
 
 let username;
@@ -59,6 +59,8 @@ function wordPlacer() {
 }
 
 function generateButtons() {
+    /* Keep this code in case it's not desired to re-organize keyboard*/
+    /*
     for (let i = 0; i < 26; i++) {
         let b = document.createElement("button");
         b.class = letter[i];
@@ -70,6 +72,35 @@ function generateButtons() {
         }
         buttons[i] = b;
         document.getElementById('buttons').appendChild(b);
+        buttons[i].style.height = "30px";
+        buttons[i].style.width = "55px";
+        buttons[i].style.margin = "2px";
+    }
+    */
+   /* Append button to correct row using if statements.*/
+   for (let i = 0; i < 26; i++) {
+        let b = document.createElement("button");
+        b.class = letter[i];
+        b.id = "button";
+        b.innerHTML = letter[i];
+        b.style.fontSize = "20px";
+        b.onclick = function () {
+            pressButton(b);
+        }
+        buttons[i] = b;
+        /* Append button to the first row. */
+        if (i < 10){
+            document.getElementById('buttonsRow1').appendChild(b);
+        } else{
+            if (i >= 10 && i < 19){
+                /* Append button to the second row. */
+                document.getElementById('buttonsRow2').appendChild(b);
+            } else{
+                /* Append button to the third row. */
+                document.getElementById('buttonsRow3').appendChild(b);
+            }
+        }
+        
         buttons[i].style.height = "30px";
         buttons[i].style.width = "55px";
         buttons[i].style.margin = "2px";
@@ -96,6 +127,14 @@ function pressButton(button) {
     button.disabled = true;
     lifeCheck();
     winCheck();
+
+    /* Change the styling of the button to show it's pressed. */
+    buttonPressed(button);
+}
+
+function buttonPressed(button){
+    button.style.background = "linear-gradient(to bottom, #bab1ba 5%, #ededed 100%)";
+	button.style.backgroundColor = "#bab1ba";
 }
 
 function winCheck() {
@@ -261,6 +300,22 @@ function start() {
     buttons.classList.add("wrapper");
     document.body.appendChild(buttons);
 
+    /* Make 3 rows of buttons to imitate QWERTY keyboard.*/
+    let buttonsRow1 = document.createElement("div");
+    buttonsRow1.id = "buttonsRow1";
+    buttonsRow1.classList.add("wrapper");
+    buttons.appendChild(buttonsRow1);
+
+    let buttonsRow2 = document.createElement("div");
+    buttonsRow2.id = "buttonsRow2";
+    buttonsRow2.classList.add("wrapper");
+    buttons.appendChild(buttonsRow2);
+
+    let buttonsRow3 = document.createElement("div");
+    buttonsRow3.id = "buttonsRow3";
+    buttonsRow3.classList.add("wrapper");
+    buttons.appendChild(buttonsRow3);
+
     let description = document.createElement("h1");
     description.id = "description";
     description.classList.add("wrapper");
@@ -273,7 +328,6 @@ function start() {
     resetButton.textContent = "Reset"
     resetHolder.appendChild(resetButton);
     document.body.appendChild(resetHolder);
-
 
     document.getElementById("platform").src = "images/3.jpg";
     document.getElementById('score').innerHTML = "Score: " + score;
@@ -316,9 +370,6 @@ function renderDatabase() {
     table.id = "score-board";
     document.body.appendChild(table);
     
-
-
-
     let tr = document.createElement("tr");
     let tdId = document.createElement("td");
     tdId.textContent = "SESSION";
