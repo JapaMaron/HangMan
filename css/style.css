@@ -65,3 +65,58 @@
 #score-board td {
 	padding: 10px;
 }
+
+/* Customizing main menu. */
+
+body{
+	background-image: url("/images/menu-background.png");
+	background-size: cover;
+	background-repeat: repeat-y;
+}
+
+#main-menu{
+	background-color: rgba(255, 255, 255, 0.85);
+	border: 3px dashed blue;
+	padding-bottom: 25px; 
+}
+
+#main-menu h1{
+	font-family: 'Indie Flower', cursive;
+	text-decoration: overline;
+	text-decoration-style: wavy;
+	font-weight: 900;
+	font-size: 65px;
+	text-shadow: 4px 4px lightgrey;
+}
+
+#main-menu h2{
+	font-family: 'Coming Soon', cursive;
+	font-size: 25px;
+	text-shadow: 3px 3px lightgrey;
+}
+
+#main-menu #username{
+	height: 6vh;
+	width: 50vw;
+	font-family: 'Coming Soon', cursive;
+	font-size: 25px;
+	font-weight: bold;
+	border: 3px solid lightskyblue;
+	text-shadow: 3px 3px lightgrey;
+}
+
+#main-menu button{
+	height: 7vh;
+	width: 100px;
+	font-family: 'Coming Soon', cursive;
+	font-size: 25px;
+	font-weight: bold;
+	border-color: lightgreen;
+	border-width: 3px 3px 3px 3px;
+	background: linear-gradient(to bottom, #f3f3f3 0%, rgb(194, 202, 194) 100%);
+}
+
+#main-menu button:active {
+	background: linear-gradient(to bottom, rgb(184, 197, 183) 0%, #f3f3f3 100%);
+	background-color:#bab1ba;
+}
