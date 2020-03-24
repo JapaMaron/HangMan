@@ -134,7 +134,7 @@ function pressButton(button) {
 
 function buttonPressed(button){
     button.style.background = "linear-gradient(to bottom, #bab1ba 5%, #ededed 100%)";
-	button.style.backgroundColor = "#bab1ba";
+    button.style.backgroundColor = "#bab1ba";
 }
 
 function winCheck() {
@@ -171,28 +171,28 @@ function gameOver() {
 function lifeCheck() {
     switch (lives) {
         case 7:
-            document.getElementById("platform").src = "images/3.jpg";
+            document.getElementById("platform").src = "images/11.png";
             break;
         case 6:
-            document.getElementById("platform").src = "images/4.jpg";
+            document.getElementById("platform").src = "images/12.png";
             break;
         case 5:
-            document.getElementById("platform").src = "images/5.jpg";
+            document.getElementById("platform").src = "images/13.png";
             break;
         case 4:
-            document.getElementById("platform").src = "images/6.jpg";
+            document.getElementById("platform").src = "images/14.png";
             break;
         case 3:
-            document.getElementById("platform").src = "images/7.jpg";
+            document.getElementById("platform").src = "images/15.png";
             break;
         case 2:
-            document.getElementById("platform").src = "images/8.jpg";
+            document.getElementById("platform").src = "images/16.png";
             break;
         case 1:
-            document.getElementById("platform").src = "images/9.jpg";
+            document.getElementById("platform").src = "images/17.png";
             break;
         case 0:
-            document.getElementById("platform").src = "images/10.jpg";
+            document.getElementById("platform").src = "images/18.png";
             let r = words[wordChosen];
             for (let i = 0; i < r.length; i++) {
                 let w = blocks[i];
@@ -213,7 +213,7 @@ function decsriptionPlacer() {
     let desc = document.getElementById("description");
     switch (wordChosen) {
         case 0:
-            desc.innerHTML = "bureaucracies form these anytime they lift a finger";
+            desc.innerHTML = "Bureaucracies form these anytime they lift a finger";
             break;
         case 1:
             desc.innerHTML = "A kind of red fish that lives in the fraser river";
@@ -329,7 +329,7 @@ function start() {
     resetHolder.appendChild(resetButton);
     document.body.appendChild(resetHolder);
 
-    document.getElementById("platform").src = "images/3.jpg";
+    document.getElementById("platform").src = "images/11.png";
     document.getElementById('score').innerHTML = "Score: " + score;
     words.push("committee");
     words.push("salmon");
