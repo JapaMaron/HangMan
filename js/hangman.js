@@ -12,6 +12,7 @@ let letter = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s",
 let username;
 let scoreBoardArray = [];
 
+//Creates the main menu that the user sees.
 function mainMenu() {
     let menu = document.createElement("div");
     menu.id = "main-menu";
