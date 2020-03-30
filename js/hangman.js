@@ -36,12 +36,14 @@ function mainMenu() {
     document.body.appendChild(menu);
 }
 
+//Randomly chooses a word from an array of words.
 function wordChooser() {
     let r = Math.floor(Math.random() * words.length);
     wordChosen = r;
     return words[r];
 }
 
+//Places the chosen word and description on the game page.
 function wordPlacer() {
     let r = wordChooser();
     for (let i = 0; i < r.length; i++) {
@@ -58,6 +60,7 @@ function wordPlacer() {
     decsriptionPlacer();
 }
 
+//Generates the buttons for A-Z.
 function generateButtons() {
     /* Keep this code in case it's not desired to re-organize keyboard*/
     /*
@@ -107,6 +110,7 @@ function generateButtons() {
     }
 }
 
+//OnClick function for buttons to check if letter is correct or not.
 function pressButton(button) {
     let r = words[wordChosen];
     let correct = false;
@@ -132,11 +136,13 @@ function pressButton(button) {
     buttonPressed(button);
 }
 
+//Changes the style of the button.
 function buttonPressed(button){
     button.style.background = "linear-gradient(to bottom, #bab1ba 5%, #ededed 100%)";
     button.style.backgroundColor = "#bab1ba";
 }
 
+//Checkes if the user has won the game.
 function winCheck() {
     let r = words[wordChosen]
     let word = "";
@@ -161,6 +167,7 @@ function winCheck() {
     }
 }
 
+//Displays "Game Over" if the user loses the game.
 function gameOver() {
     document.getElementById("description").innerHTML = "";
     document.getElementById("word").innerHTML = "GAME OVER";
@@ -168,6 +175,7 @@ function gameOver() {
 
 }
 
+//Checks the users current life to display correct picture or call gameover function.
 function lifeCheck() {
     switch (lives) {
         case 7:
@@ -209,6 +217,7 @@ function lifeCheck() {
     }
 }
 
+//Chooses the description depending on what word was randomly chosen.
 function decsriptionPlacer() {
     let desc = document.getElementById("description");
     switch (wordChosen) {
@@ -242,11 +251,18 @@ function decsriptionPlacer() {
         case 9:
             desc.innerHTML = "The part of the alimentary canal that connects the throat to the stomach; the gullet. In humans and other vertebrates it is a muscular tube lined with mucous membrane.";
             break;
+        case 10:
+            desc.innerHTML = "A form of body modification where a design is made by inserting ink";
+            break;
+        case 11:
+            desc.innerHTML = "Is the set of physical phenomena associated with the presence and motion of electric charge.";
+            break;    
         default:
             break;
     }
 }
 
+//Resets the game by reloading the page.
 function resetButton() {
     window.location.reload(false); 
     /* Hopefully we don't need this
@@ -272,7 +288,7 @@ function resetButton() {
     */
 }
 
-
+//Places everything where it should be when game is started.
 function start() {
     username = document.getElementById("username").value;
     document.getElementById("main-menu").remove();
@@ -341,11 +357,14 @@ function start() {
     words.push("circus");
     words.push("time");
     words.push("esophagus");
+    words.push("tattoo");
+    words.push("electricity");
     generateButtons();
     wordPlacer();
     document.getElementById("reset").setAttribute("onclick", "resetButton()");
 }
 
+//Reads from the database.
 function readDatabase() {
     db.collection('sessions').orderBy('order').limit(10).get().then(snapshot => {
         snapshot.docs.forEach(doc => {
@@ -359,6 +378,7 @@ function readDatabase() {
     });
 }
 
+//Creates the leaderboard from the database info.
 function renderDatabase() {
     let scoreTitle = document.createElement("h1");
     scoreTitle.textContent = textContent = "Top 10 Players";
@@ -397,6 +417,7 @@ function renderDatabase() {
     }
 }
 
+//Displays the leaderboard.
 async function presentResults(username, score) {
     await db.collection('sessions').add({
         "order": score * -1,

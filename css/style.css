@@ -65,17 +65,17 @@
 #score-board td {
 	padding: 10px;
 }
-#description {
+#description, #score, #word, tr, h1 {
 	font-family: 'coming soon', cursive;
 }
-#score {
-	font-family: 'coming soon', cursive;
+#block {
+	font-size: 18px;
 }
 
 /* Customizing main menu. */
 
 body{
-	background-image: url("/images/menu-background.png");
+	background-image: url("../images/menu-background.png");
 	background-size: cover;
 	background-repeat: repeat-y;
 }
