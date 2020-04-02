@@ -63,24 +63,6 @@ function wordPlacer() {
 
 //Generates the buttons for A-Z.
 function generateButtons() {
-    /* Keep this code in case it's not desired to re-organize keyboard*/
-    /*
-    for (let i = 0; i < 26; i++) {
-        let b = document.createElement("button");
-        b.class = letter[i];
-        b.id = "button";
-        b.innerHTML = letter[i];
-        b.style.fontSize = "20px";
-        b.onclick = function () {
-            pressButton(b);
-        }
-        buttons[i] = b;
-        document.getElementById('buttons').appendChild(b);
-        buttons[i].style.height = "30px";
-        buttons[i].style.width = "55px";
-        buttons[i].style.margin = "2px";
-    }
-    */
    /* Append button to correct row using if statements.*/
    for (let i = 0; i < 26; i++) {
         let b = document.createElement("button");
@@ -111,7 +93,7 @@ function generateButtons() {
     }
 }
 
-//OnClick function for buttons to check if letter is correct or not.
+//OnClick function for buttons to check if letter is correct.
 function pressButton(button) {
     let r = words[wordChosen];
     let correct = false;
@@ -266,30 +248,9 @@ function decsriptionPlacer() {
 //Resets the game by reloading the page.
 function resetButton() {
     window.location.reload(false); 
-    /* Hopefully we don't need this
-    let r = words[wordChosen]
-    lives = 7;
-    lifeCheck();
-    if (document.getElementById("word").innerHTML != "GAME OVER") {
-        for (let i = 0; i < r.length; i++) {
-            let w = blocks[i];
-            w.parentNode.removeChild(w);
-        }
-        for (let i = 0; i < buttons.length; i++) {
-            let w = buttons[i];
-            w.parentNode.removeChild(w);
-        }
-    }
-    document.getElementById("word").innerHTML = "";
-    score = 0;
-    document.getElementById('score').innerHTML = "Score: " + score;
-    
-    wordPlacer();
-    generateButtons();
-    */
 }
 
-//Places everything where it should be when game is started.
+//Places everything when the game is started.
 function start() {
     username = document.getElementById("username").value;
     document.getElementById("main-menu").remove();
